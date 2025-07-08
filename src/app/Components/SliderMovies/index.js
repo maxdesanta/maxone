@@ -9,10 +9,7 @@ import ReactPlayer from "react-player";
 import { slidesData } from '../../Data/SlideData';
 import CardSlider from '../Card/Slider';
 
-export default function SliderMovies() {
-    const [modalIsOpen, setIsOpen] = useState(false);
-    const [selectMovies, setSelectMovie] = useState(null);
-
+export default function SliderMovies({movies}) {
     const settings = {
         dots: false,
         arrows: false,
@@ -24,59 +21,31 @@ export default function SliderMovies() {
         initialSlide: 0,
         autoplay: true
     };
-    
-    const openModal = (m) => {
-        setIsOpen(true);
-        setSelectMovie(m);
-    }
-
-    const closeModal = () => {
-        setIsOpen(false);
-        setSelectMovie(null);
-    }
 
     return (
         <div className="container pl-10">
             <Slider {...settings}>
-                {slidesData.map((slide, index) => (
-                <div className="relative" key={index}>
-                    <CardSlider imageCover={slide.cover} title={slide.title} rating={slide.rating} duration={slide.duration} ageRating={slide.ageRating} click={() => openModal(slide.link)} />  
+                {movies.map((slide) => (
+                <div className="relative" key={slide.id}>
+                    <CardSlider id={slide.id} imageCover={`https://image.tmdb.org/t/p/original/${slide.poster_path}`} title={slide.title} rating={Math.round(slide.vote_average * 10) / 10} duration={formatDuration(slide.runtime)} ageRating={slide.ageRating} />  
                     <div className="absolute top-0 right-0 z-[-10] opacity-50">
-                        <Image src={slide.bg} alt="cover-slider" width={770} />
+                        <Image src={`https://image.tmdb.org/t/p/original/${slide.backdrop_path}`} alt="cover-slider" width={770} height={500} />
                         <div className="absolute top-0 left-0 w-1/4 h-full bg-gradient-to-l from-transparent to-black"></div>    
-                        <div  className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-r from-transparent to-black"></div>
+                        <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-r from-transparent to-black"></div>
                         <div className="absolute top-0 right-0 bg-gradient-to-t from-transparent to-black w-full h-1/5"></div>    
                         <div className="absolute bottom-0 w-full h-1/5 bg-gradient-to-b from-transparent to-black"></div>
                     </div>    
                 </div>     
                 ))}
             </Slider>
-            <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                contentLabel="Modal Trailer slider"
-                style={{
-                    overlay: {
-                        backgroundColor: "rgba(0, 0, 0, 0.7)"
-                    },
-                    content: {
-                        width: "850px",
-                        height: "85vh",
-                        margin: "auto",
-                        padding: 0,
-                        border: "none",
-                        borderRadius: "none",
-                        position: "relative"
-                    }
-                }}
-            >
-                {selectMovies && <ReactPlayer
-                    url={selectMovies}
-                    width='100%'
-                    height='100%'
-                    controls={true}
-                />}
-            </Modal>
         </div>
     );
 }
+
+// format duration
+const formatDuration = (totalMinutes) => {
+    if (!totalMinutes) return 'N/A';
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    return `${hours}h ${minutes}m`;
+};
