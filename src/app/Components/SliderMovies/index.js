@@ -27,7 +27,7 @@ export default function SliderMovies({movies}) {
             <Slider {...settings}>
                 {movies.map((slide) => (
                 <div className="relative" key={slide.id}>
-                    <CardSlider id={slide.id} imageCover={`https://image.tmdb.org/t/p/original/${slide.poster_path}`} title={slide.title} rating={Math.round(slide.vote_average * 10) / 10} duration={formatDuration(slide.runtime)} ageRating={slide.ageRating} />  
+                    <CardSlider id={slide.id} imageCover={`https://image.tmdb.org/t/p/original/${slide.poster_path}`} title={slide.title} rating={Math.round(slide.vote_average * 10) / 10} duration={formatDuration(slide.runtime)} />  
                     <div className="absolute top-0 right-0 z-[-10] opacity-50">
                         <Image src={`https://image.tmdb.org/t/p/original/${slide.backdrop_path}`} alt="cover-slider" width={770} height={500} />
                         <div className="absolute top-0 left-0 w-1/4 h-full bg-gradient-to-l from-transparent to-black"></div>    

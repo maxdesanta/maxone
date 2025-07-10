@@ -32,43 +32,44 @@ export default async function DetailMovie({ params }) {
 
   return (
     <div className="container mx-auto px-10 pt-5">
-      <div className="flex gap-x-5">
+      <div className="flex flex-col md:flex-row gap-x-5">
         <div>
-          <div>
+          <div className="aspect-video w-full h-[250px] md:h-[500px]">
             <iframe
               width="100%"
-              height="500"
+              className="h-full w-full" 
               src={`https://www.youtube.com/embed/${trailer.key}`}
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
-          <div className="flex justify-between pt-5 pb-6">
+          <div className="flex justify-between pt-3 pb-5">
             <div>
-              <h4 className="text-2xl font-semibold">{movie.title}</h4>
+              <h4 className="text-xl md:text-2xl font-semibold">{movie.title}</h4>
             </div>
             <div className="bg-[#201F1F] flex items-center justify-center gap-x-2 rounded-full px-2">
               <FontAwesomeIcon
                 icon="fa-solid fa-star"
-                className="text-[#F1CE2C] w-5"
+                className="text-[#F1CE2C] w-4"
               />
-              <h4 className="text-xl font-semibold">
+              <h4 className="text-base font-semibold">
                 {Math.round(movie.vote_average * 10) / 10}
               </h4>
             </div>
           </div>
-          <div className="border-white border-t border-r pr-48 flex flex-col gap-y-10 pb-5 w-[1100px] h-[400px]">
+          <div className="border-white border md:border-t md:border-r md:border-l-0 md:border-b-0 md:pr-48 flex flex-col gap-y-10 lg:pb-5 md:w-[1100px] md:h-auto p-5 md:p-0 mb-5 md:mb-0">
             <div>
-              <h6 className="text-2xl font-semibold py-5">Synopsis</h6>
+              <h6 className="text-2xl font-semibold md:py-5 pb-5">Synopsis</h6>
               <p className="text-sm">{movie.overview}</p>
             </div>
             <div className="flex gap-x-3">
-              <div>
+              <div className="hidden md:block">
                 <Image
                   src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                   alt="cover-film"
+                  className="object-cover"
                   width={140}
                   height={200}
                 />
@@ -130,8 +131,8 @@ export default async function DetailMovie({ params }) {
             </div>
           </div>
         </div>
-        <div className="w-[750px]">
-          <h4 className="text-2xl font-semibold pb-7">Recommendation</h4>
+        <div className="pb-5 md:pb-0 md:w-[750px]">
+          <h4 className="text-xl md:text-2xl font-semibold pb-4 md:pb-7">Recommendation</h4>
           <div className="flex flex-col gap-y-6">
             {sliceRecommendations.map((recommendation) => (
               <RecomendtationCard

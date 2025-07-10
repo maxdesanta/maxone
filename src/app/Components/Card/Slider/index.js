@@ -10,14 +10,15 @@ export default function CardSlider({id,imageCover, title, rating, duration, ageR
     return (
         <>
             <Link href={`/${id}`}>
-                <div className="flex gap-x-5 w-1/2">
-                    <Image src={imageCover} alt="cover-slider" width={260} height={400} />
-                    <div className="flex flex-col gap-y-8">
+                <div className="flex md:gap-x-5 w-full md:w-1/2">
+                    <div className="hidden md:block">
+                        <Image src={imageCover} alt="cover-slider" width={260} height={400} />
+                    </div>
+                    <div className="flex flex-col gap-5 md:gap-y-8">
                         <div>
-                            <h1 className="text-5xl font-bold leading">{title}</h1>
-                            <h2 className="text-3xl">{ageRating}</h2>
+                            <h1 className="text-4xl md:text-5xl font-bold leading">{title}</h1>
                         </div>
-                        <div className="flex flex-col gap-y-3">
+                        <div className="flex flex-col gap-y-2 md:gap-y-3">
                             <div className="flex items-center gap-x-2">
                                 <h2>Rating:</h2>
                                 <div className="flex gap-x-1 items-center">
@@ -35,7 +36,7 @@ export default function CardSlider({id,imageCover, title, rating, duration, ageR
                                 </div>      
                             </div>      
                         </div>
-                        <div className="bg-[#D9D9D9] flex items-center justify-center py-2 gap-x-3 rounded-sm w-[150px] mt-5 cursor-pointer hover:bg-white" onClick={click}>
+                        <div className="bg-[#D9D9D9] flex items-center justify-center  py-2 gap-x-3 rounded-sm w-[125px] md:w-[150px] mb-8 md:mt-5 cursor-pointer hover:bg-white" onClick={click}>
                             <FontAwesomeIcon icon="fa-solid fa-play" className="text-black w-5"/>  
                             <h2 className="text-black text-xs">Watch Trailer</h2>    
                         </div>  

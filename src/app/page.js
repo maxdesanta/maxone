@@ -13,7 +13,7 @@ export default async function Home() {
   return (
     <div>
       <SliderMovies movies={sliderMovies} />
-      <div className="pt-20">
+      <div className="pt-10 md:pt-20">
         <CategoryFilm
           style1="flex flex-col gap-y-8 pl-10"
           style2="flex gap-x-4 items-center"
